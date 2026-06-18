@@ -9,5 +9,4 @@ public class AgendaPersonalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AgendaPersonalApplication.class, args);
 	}
-
 }

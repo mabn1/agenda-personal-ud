@@ -1,29 +1,24 @@
-package co.edu.udistrital.agendapersonal.entity;
+package co.edu.udistrital.agendapersonal.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "phone_number")
-public class PhoneNumber {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@NoArgsConstructor
+@AllArgsConstructor
+public class PhoneRequestDTO {
 
     @NotBlank(message = "El código de país es obligatorio")
     @Pattern(
             regexp = "^\\+[0-9]{1,4}$",
             message = "Formato de código de país inválido. Ejemplo: +57"
     )
-    @Column(name = "country_code", nullable = false, length = 5)
     private String countryCode;
 
     @NotBlank(message = "El número de teléfono es obligatorio")
@@ -32,11 +27,5 @@ public class PhoneNumber {
             regexp = "^[0-9]+$",
             message = "El número de teléfono solo debe contener dígitos"
     )
-    @Column(nullable = false, length = 20)
     private String number;
-
-    @ManyToOne
-    @JoinColumn(name = "personal_data_id", nullable = false)
-    @JsonBackReference
-    private PersonalData personalData;
 }
